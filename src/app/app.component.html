@@ -1,20 +1,71 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="row startingRow m-0">
+    <div class="col-5 col-sm-5 col-md-5 col-lg-5 col-xl-5 p-1">
+        <p>Live Tracking</p>
+    </div>
+    <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2  p-1">
+        <form class="example-form">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Search here" autocorrect="off" autocapitalize="off" spellcheck="off">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </mat-form-field>
+        </form>
+    </div>
+    <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 p-1">
+        <mat-form-field>
+            <mat-select placeholder="Vehicle Groups">
+                <mat-option *ngFor="let Vehicle of vehicleList">
+                    {{Vehicle.villageName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2  p-1">
+        <mat-form-field>
+            <mat-select placeholder="Trip status">
+                <mat-option *ngFor="let trip of trips" [value]="trip.value">
+                    {{trip.place}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1  p-1">
+        <a href=""> +More</a>
+    </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="row m-0">
+    <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0">
+       <!-- <div class="row">
+           <div>{{data.vehicleRegistrationNumber}}
+           <span style="float:right;">{{data.gpsState.state}}</span>
+           </div>
+           <div>
+               <div>{{data.source}}</div>
+               <div>{{data.vtsState.address}}</div>
+           </div>
+       </div> -->
+    </div>
+    <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 p-0">
+        <agm-map [latitude]="lat" [longitude]="lng"
+         [zoom]="zoom" 
+         [disableDefaultUI]="false" 
+         [zoomControl]="false"
+         [styles]="styles" 
+         (mapClick)="mapClicked($event)">
 
+            <agm-marker src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
+                *ngFor="let m of markers; let i = index" 
+                (markerClick)="clickedMarker(m.label, i)" 
+                [latitude]="m.lat"
+                [longitude]="m.lng" 
+                [label]="m.label" 
+                [markerDraggable]="m.draggable" 
+                (dragEnd)="markerDragEnd(m, $event)">
+
+                <agm-info-window>
+                    <strong>InfoWindow content</strong>
+                </agm-info-window>
+            </agm-marker>
+            <agm-polygon [paths]="polygon"></agm-polygon>
+        </agm-map>
+    </div>
+</div>

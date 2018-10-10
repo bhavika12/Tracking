@@ -1,4 +1,22 @@
-# Tracking
+
+##Installation Steps :-
+
+##on Command Line 
+
+Firstly Install Node and Angular Cli on your System
+
+1. npm install @angular/cli
+2. git clone  https://github.com/bhavika12/Tracking.git Folder name (Tracking) /// where you want to copy your files.
+3. cd file name (Tracking)
+4. git checkout Tracking
+5. npm install
+6. ng serve /// You can run your project on `http://localhost:4200/`
+
+2. Open the Google chrome 
+   1. Enter http://localhost:4200/
+
+   
+   # Tracking
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.5.
 
